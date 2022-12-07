@@ -1,9 +1,11 @@
+import React from "react";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import styles from "../assets/styles/Home.module.scss";
+import CardModal from "../components/cardModal";
 
 const TabsData = [
   {
@@ -201,6 +203,8 @@ const userProfile = [
 ];
 
 export default function Home() {
+  const [modalShow, setModalShow] = React.useState(false);
+
   return (
     <div className={styles.container}>
       <div className={styles.containerTabs}>
@@ -213,7 +217,11 @@ export default function Home() {
             {/* <div className="container"> */}
             <div className="tab_flx_box">
               {TabsData.map((item, index) => (
-                <div key={index} className="tab_card">
+                <div
+                  key={index}
+                  className="tab_card"
+                  onClick={() => setModalShow(true)}
+                >
                   <img className="card_img" src={item.cardimg} alt="" />
                   <div className="card_content">
                     <h3 className="card_heading">{item.card_heading}</h3>
@@ -236,6 +244,8 @@ export default function Home() {
                 </div>
               ))}
             </div>
+            <CardModal show={modalShow} onHide={() => setModalShow(false)} />
+
             {/* </div> */}
             <div className="check_priorities_bx">
               <div className="check_container">
@@ -472,7 +482,7 @@ export default function Home() {
             title="Check-in Notes"
           >
             <div className="check_container">
-              <h2>Check-in Notes</h2>
+              <h5>Check-in-notes</h5>
             </div>
           </Tab>
           <Tab
